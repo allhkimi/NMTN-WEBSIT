@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NMTN — No More Than Necessary</title>
+  <meta name="description" content="NMTN sportswear & community. Minimal gear for maximum movement. No More Than Necessary." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#324ef7;          /* primary */
+      --brand-600:#2237c9;
+      --ink:#0b0b0b;            /* near-black text */
+      --bg:#0e0e10;             /* page background */
+      --muted:#aeb3c2;          /* cool gray */
+      --card:#141418;           /* card surface */
+      --line:#23232a;           /* subtle borders */
+      --ok:#A5D75F;             /* positive accent */
+      --warm:#ff9f66;           /* warm accent */
+      --white:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--white);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:1200px; margin:0 auto; padding:0 20px}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px);
+      background:linear-gradient(180deg, rgba(14,14,16,.9), rgba(14,14,16,.6));
+      border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; height:72px}
+    .logo{display:flex; align-items:center; gap:10px}
+    .logo-mark{width:34px; height:34px; border-radius:9px; background:var(--brand); display:grid; place-items:center; box-shadow:0 8px 20px rgba(50,78,247,.35)}
+    .logo-mark:before{content:""; width:16px; height:2px; background:#fff; transform:skewX(-20deg)}
+    .logo h1{font:800 18px Outfit, Inter, sans-serif; letter-spacing:.06em}
+    .nav-links{display:flex; gap:24px; align-items:center}
+    .nav-links a{color:#e9e9ef; font:600 14px Inter, sans-serif; opacity:.86}
+    .nav-links a:hover{opacity:1}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid var(--line); background:transparent; color:#fff; font:600 14px Inter; cursor:pointer}
+    .btn.primary{background:var(--brand); border-color:transparent; box-shadow:0 8px 18px rgba(50,78,247,.35)}
+    .btn.primary:hover{background:var(--brand-600)}
+    .hamburger{display:none; width:40px; height:40px; border-radius:10px; border:1px solid var(--line); align-items:center; justify-content:center}
+
+    /* Hero */
+    .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line)}
+    .hero .container{display:grid; grid-template-columns:1.1fr .9fr; gap:32px; padding:60px 20px 80px}
+    .kicker{color:var(--muted); font:600 12px Inter; letter-spacing:.22em; text-transform:uppercase}
+    .headline{font:900 48px Outfit; line-height:1.02; letter-spacing:-.02em; margin:.3rem 0 1rem}
+    .headline strong{color:var(--brand)}
+    .sub{color:#d7d8e0; font:400 16px Inter; opacity:.9; max-width:54ch}
+    .cta-row{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
+    .hero-media{position:relative; min-height:360px; border-radius:20px; background:linear-gradient(135deg,#1b1b22, #0e0e10 60%), url('assets/hero.jpg') center/cover no-repeat; border:1px solid var(--line)}
+    .hero-tag{position:absolute; left:16px; top:16px; padding:8px 12px; border-radius:999px; background:rgba(50,78,247,.15); color:#cfd6ff; font:600 12px Inter; border:1px solid rgba(50,78,247,.35)}
+
+    /* Marquee */
+    .marquee{border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden}
+    .marquee .track{display:flex; gap:36px; padding:14px 0; animation:scroll 26s linear infinite; white-space:nowrap}
+    .pill{border:1px solid var(--line); border-radius:999px; padding:8px 12px; color:#d9d9e2; font:600 12px Inter; letter-spacing:.08em}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+
+    /* Products */
+    .section{padding:72px 0; border-bottom:1px solid var(--line)}
+    .section h2{font:800 32px Outfit; margin:0 0 18px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .card{grid-column:span 4; background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-6px); box-shadow:0 14px 30px rgba(0,0,0,.35)}
+    .thumb{aspect-ratio:4/5; background:#0a0a0c center/cover no-repeat;}
+    .meta{padding:14px 14px 16px; display:flex; align-items:center; justify-content:space-between}
+    .meta .t{display:flex; gap:8px; align-items:center}
+    .badge{font:700 10px Inter; text-transform:uppercase; letter-spacing:.15em; padding:6px 8px; border-radius:999px; border:1px solid var(--line); color:#cfd0da}
+    .price{font:800 16px Outfit}
+    .add{padding:8px 12px; border:1px solid var(--line); border-radius:12px; cursor:pointer}
+    .add:hover{border-color:var(--brand)}
+
+    /* Banner Split */
+    .split{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .panel{min-height:280px; border:1px solid var(--line); border-radius:18px; background:var(--card); overflow:hidden; position:relative}
+    .panel.media-left{background:linear-gradient(180deg, rgba(50,78,247,.22), transparent 50%), url('assets/banner1.jpg') center/cover}
+    .panel.media-right{background:linear-gradient(180deg, rgba(165,215,95,.22), transparent 50%), url('assets/banner2.jpg') center/cover}
+    .panel .copy{position:absolute; inset:auto 16px 16px 16px}
+    .panel h3{font:800 28px Outfit; margin:0 0 6px}
+    .panel p{color:#e7e8f2; opacity:.9; margin:0 0 12px}
+
+    /* Community */
+    .ugc{display:grid; grid-template-columns:repeat(6,1fr); gap:12px}
+    .ugc .ph{aspect-ratio:1; border-radius:14px; border:1px dashed var(--line); background:#101015; display:grid; place-items:center; color:#8d92a3; font:600 12px Inter}
+
+    /* Newsletter */
+    .newsletter{display:grid; grid-template-columns:1.2fr .8fr; gap:18px; align-items:center}
+    .nl-card{background:linear-gradient(180deg,#101218,#0b0b10); border:1px solid var(--line); border-radius:18px; padding:24px}
+    .nl-title{font:800 28px Outfit; margin:0 0 10px}
+    .nl-desc{color:#d8d9e1}
+    .nl-form{display:flex; gap:10px; margin-top:14px}
+    .nl-form input{flex:1; background:#0c0c11; border:1px solid var(--line); border-radius:12px; padding:14px 12px; color:#fff; font:500 14px Inter}
+
+    /* Footer */
+    footer{padding:36px 0 60px; color:#c6c8d1}
+    .foot{display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px}
+    .foot h4{font:700 14px Inter; letter-spacing:.12em; text-transform:uppercase; margin:0 0 12px; color:#e9eaf1}
+    .foot a{display:block; padding:6px 0; opacity:.85}
+    .copyright{margin-top:26px; border-top:1px solid var(--line); padding-top:18px; font-size:13px; color:#989db0}
+
+    /* Utilities */
+    .hide{display:none}
+    .chip{display:inline-flex; align-items:center; gap:10px; padding:8px 10px; border:1px solid var(--line); border-radius:12px}
+    .accent{color:var(--brand)}
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .hero .container{grid-template-columns:1fr; gap:16px; padding:36px 20px 52px}
+      .headline{font-size:40px}
+      .newsletter{grid-template-columns:1fr}
+    }
+    @media (max-width: 800px){
+      .nav-links{display:none}
+      .hamburger{display:flex}
+      .grid .card{grid-column:span 6}
+      .split{grid-template-columns:1fr}
+      .ugc{grid-template-columns:repeat(3,1fr)}
+      .foot{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 520px){
+      .headline{font-size:34px}
+      .grid .card{grid-column:span 12}
+      .ugc{grid-template-columns:repeat(2,1fr)}
+      .foot{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" aria-label="Primary Navigation">
+      <a class="logo" href="#" aria-label="NMTN Home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <h1>NMTN</h1>
+      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="#shop">Shop</a>
+        <a href="#new">New</a>
+        <a href="#collections">Collections</a>
+        <a href="#community">Community</a>
+        <a href="#about">About</a>
+        <button class="btn" id="searchBtn" aria-label="Search site">Search</button>
+        <button class="btn primary" aria-label="Go to cart">Cart · <span id="cartCount">0</span></button>
+      </nav>
+      <button class="hamburger" id="menuBtn" aria-label="Open Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="#cfd2e8" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div>
+          <div class="kicker">No More Than Necessary</div>
+          <h2 class="headline">Minimal gear. <strong>Maximum movement.</strong> <br/> Built for everyone.</h2>
+          <p class="sub">A sportswear & streetwear label for the everyday athlete. Whether you're new or elite—NMTN brings people together to move, sweat, and grow.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#shop">Shop Collection</a>
+            <a class="btn" href="#community">Join Community</a>
+          </div>
+        </div>
+        <div class="hero-media" role="img" aria-label="Athlete wearing NMTN set">
+          <span class="hero-tag">DROP 01 · UNITY</span>
+        </div>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="track">
+          <span class="pill">NMTN</span>
+          <span class="pill">No More Than Necessary</span>
+          <span class="pill">Inclusive · Minimal · Strong</span>
+          <span class="pill">#324EF7</span>
+          <span class="pill">Community Runs</span>
+          <span class="pill">NMTN</span>
+          <span class="pill">No More Than Necessary</span>
+          <span class="pill">Inclusive · Minimal · Strong</span>
+          <span class="pill">#324EF7</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section container" id="shop">
+      <h2>Featured</h2>
+      <div class="grid">
+        <!-- Product card template -->
+        <article class="card" data-product>
+          <div class="thumb" style="background-image:url('assets/products/hoodie-nmtn.jpg')" aria-label="NMTN Core Hoodie"></div>
+          <div class="meta">
+            <div class="t"><span class="badge">Core</span><span>Core Hoodie</span></div>
+            <div class="t">
+              <span class="price">RM159</span>
+              <button class="add" data-add>+</button>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-product>
+          <div class="thumb" style="background-image:url('assets/products/tee-unity.jpg')" aria-label="Unity Tee"></div>
+          <div class="meta">
+            <div class="t"><span class="badge">Unity</span><span>Unity Tee</span></div>
+            <div class="t"><span class="price">RM89</span><button class="add" data-add>+</button></div>
+          </div>
+        </article>
+        <article class="card" data-product>
+          <div class="thumb" style="background-image:url('assets/products/track-pants.jpg')" aria-label="Track Pants"></div>
+          <div class="meta">
+            <div class="t"><span class="badge">Move</span><span>Track Pants</span></div>
+            <div class="t"><span class="price">RM129</span><button class="add" data-add>+</button></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SPLIT BANNERS -->
+    <section class="section container" id="collections">
+      <div class="split">
+        <div class="panel media-left" role="img" aria-label="Outdoor run">
+          <div class="copy">
+            <h3>Unity Drop</h3>
+            <p>Pieces that bring people together. Unisex fits, breathable fabrics, built to move.</p>
+            <a class="btn primary" href="#">Explore</a>
+          </div>
+        </div>
+        <div class="panel media-right" role="img" aria-label="Gym session">
+          <div class="copy">
+            <h3>Essentials</h3>
+            <p>No fluff. Everyday staples in our signature <span class="accent">#324EF7</span>.</p>
+            <a class="btn" href="#">Shop Essentials</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY / UGC -->
+    <section class="section container" id="community">
+      <h2>Community</h2>
+      <p class="sub">We don’t just chase the goal — we celebrate the progress. Tag <strong>@NMTN</strong> to be featured.</p>
+      <div class="ugc" aria-label="Community gallery placeholders">
+        <div class="ph">Add IMG 1</div>
+        <div class="ph">Add IMG 2</div>
+        <div class="ph">Add IMG 3</div>
+        <div class="ph">Add IMG 4</div>
+        <div class="ph">Add IMG 5</div>
+        <div class="ph">Add IMG 6</div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="section container" id="new">
+      <div class="newsletter">
+        <div class="nl-card">
+          <h3 class="nl-title">Join the movement</h3>
+          <p class="nl-desc">Early access to drops, community runs, and training guides. Zero spam.</p>
+          <form class="nl-form" id="nlForm" aria-label="Newsletter form">
+            <input type="email" placeholder="Email address" aria-label="Email address" required>
+            <button class="btn primary" type="submit">Subscribe</button>
+          </form>
+          <small id="nlMsg" role="status" aria-live="polite"></small>
+        </div>
+        <div class="nl-card">
+          <h3 class="nl-title">Our Promise</h3>
+          <p class="nl-desc">Designed with intention. Built to last. <span class="accent">No More Than Necessary.</span></p>
+          <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+            <span class="chip">Moisture-wicking</span>
+            <span class="chip">Unisex fits</span>
+            <span class="chip">Recycled fabrics</span>
+            <span class="chip">Fair production</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container" id="about">
+    <div class="foot">
+      <div>
+        <div class="logo" style="margin-bottom:10px"><span class="logo-mark"></span><h1>NMTN</h1></div>
+        <p style="color:#b8bccd; max-width:42ch">A sportswear & streetwear community from Malaysia. Built for everyone, everywhere.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="#shop">Men</a>
+        <a href="#shop">Women</a>
+        <a href="#collections">Collections</a>
+        <a href="#">Gift Cards</a>
+      </div>
+      <div>
+        <h4>About</h4>
+        <a href="#community">Community</a>
+        <a href="#about">Sustainability</a>
+        <a href="#about">Careers</a>
+        <a href="#about">Contact</a>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> NMTN — No More Than Necessary. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Mobile menu (simple demo toggle)
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.querySelector('.nav-links');
+    menuBtn?.addEventListener('click', () => {
+      navLinks?.classList.toggle('hide');
+    });
+
+    // Cart demo
+    let cart = 0; const badge = document.getElementById('cartCount');
+    document.querySelectorAll('[data-add]').forEach(btn=>{
+      btn.addEventListener('click',()=>{cart++; if(badge) badge.textContent = cart; btn.textContent='✓'; setTimeout(()=>btn.textContent='+',900);});
+    });
+
+    // Newsletter demo
+    const nlForm = document.getElementById('nlForm'); const nlMsg = document.getElementById('nlMsg');
+    nlForm?.addEventListener('submit', (e)=>{e.preventDefault(); nlMsg.textContent='Thanks for joining — check your inbox!'; (e.target.reset) && e.target.reset();});
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Elevate header on scroll
+    const header = document.querySelector('header');
+    let lastY = 0;
+    window.addEventListener('scroll',()=>{
+      const y = window.scrollY;
+      header.style.boxShadow = y>8 ? '0 10px 30px rgba(0,0,0,.3)' : 'none';
+      header.style.transform = y>lastY && y>120 ? 'translateY(-8px)' : 'translateY(0)';
+      lastY = y;
+    });
+
+    // Reveal on view (IntersectionObserver)
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach((el)=>{
+        if(el.isIntersecting){ el.target.animate([{opacity:0, transform:'translateY(10px)'},{opacity:1, transform:'translateY(0)'}],{duration:500, easing:'ease-out', fill:'both'}); observer.unobserve(el.target);} 
+      });
+    }, {threshold:.12});
+    document.querySelectorAll('.card, .panel, .ugc .ph, .nl-card').forEach(n=>observer.observe(n));
+  </script>
+</body>
+</html>
